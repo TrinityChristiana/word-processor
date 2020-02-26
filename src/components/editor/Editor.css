@@ -1,0 +1,23 @@
+.editor {
+    width: 98%;
+    border: 1px solid black;
+    align-self: center;
+    height: 97vh;
+}
+
+#cursor{
+    animation:blinkingText 1.2s infinite;
+    font-size: 16px;
+    letter-spacing: -10px;
+    z-index: -9;
+    position: relative;
+    right: 2px;
+}
+
+@keyframes blinkingText{
+    0%{     color: #000;    }
+    49%{    color: #000; }
+    60%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #000;    }
+}
