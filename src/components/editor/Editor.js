@@ -1,22 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Editor.css';
 import ContentEditable from 'react-contenteditable';
 
 const Editor = props => {
 	// const [textValue, setTextValue] = useState('');
-	const [html, setHTML] = useState('');
-	const [undoHTML, setUndoHTML] = useState([]);
 	const contentEditable = React.createRef();
     
 	let typingTimer; //timer identifier
+    const {doneTyping, html} = props;
 
-    //user is "finished typing," do something
-    const doneTyping = (evt) => {
-        const newArray = undoHTML;
-        newArray.push(html);
-        setUndoHTML(newArray)
-        setHTML(evt.target.value)
-    }
 
 	//on keyup, start the countdown
 	const handleChange = (evt) => {
