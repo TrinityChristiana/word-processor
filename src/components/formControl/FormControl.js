@@ -9,7 +9,7 @@ const FormControl = props => {
     }
     return (
         <div className="form-control">
-            <Button id="print" onClick={() => handleClick("print")} icon="print" content="Print" />
+            <Button id="print" onClick={() => window.print()} icon="print" content="Print" />
             <Button id="bold" onClick={() => handleClick("bold")} icon="bold" content="Bold" />
             <Button id="italics" onClick={() => handleClick("italics")} icon="italic" content="Italic" />
             <Button id="strike" onClick={() => handleClick("strike")} icon="strikethrough" content="Strikethrough" />
