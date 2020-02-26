@@ -1,7 +1,15 @@
 .App {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border: 1px solid red;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+}
+
+@media print {
+	.form-control {
+		display: none;
+	}
+	.editor {
+    border: none;
+	}
 }
