@@ -13,9 +13,9 @@ const FormControl = props => {
     return (
         <div className="form-control">
             <Button id="print" onClick={() => window.print()} icon="print" content="Print" />
-            <Button id="bold" onClick={() => styleHtml("b")} icon="bold" content="Bold" />
-            <Button id="italics" onClick={() => styleHtml("em")} icon="italic" content="Italic" />
-            <Button id="strike" onClick={() => styleHtml("del")} icon="strikethrough" content="Strikethrough" />
+            <Button id="bold" onClick={() => styleHtml("bold")} icon="bold" content="Bold" />
+            <Button id="italics" onClick={() => styleHtml("italic")} icon="italic" content="Italic" />
+            <Button id="strike" onClick={() => styleHtml("strikeThrough")} icon="strikethrough" content="Strikethrough" />
             <Button id="undo" onClick={() => handleClick("undo")} icon="undo" content="Undo" />
             <Button id="redo" onClick={() => handleClick("redo")} icon="redo" content="Redo" />
         </div>

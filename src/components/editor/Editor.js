@@ -2,19 +2,16 @@ import React from 'react';
 import './Editor.css';
 import ContentEditable from 'react-contenteditable';
 
-const Editor = props => {
-	// const [textValue, setTextValue] = useState('');
-	const contentEditable = React.createRef();
-    
+const Editor = ({doneTyping, html, contentEditable}) => {
 	let typingTimer; //timer identifier
-    const {doneTyping, html} = props;
-
+   
 	//on keyup, start the countdown
 	const handleChange = (evt) => {
         // console.log(evt.target.value)
 		clearTimeout(typingTimer);
-		typingTimer = setTimeout(() => doneTyping(evt), 1000);
+		typingTimer = setTimeout(() => doneTyping(evt), 2000);
 	};
+
 
 	//on keydown, clear the countdown
 	const handleKeyDown = () => {
