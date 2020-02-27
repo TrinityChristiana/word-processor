@@ -4,25 +4,39 @@ import FormControl from './components/formControl/FormControl';
 import './App.css';
 
 function App() {
-	const [html, setHTML] = useState('');
-  const [undoHTML, setUndoHTML] = useState([]);
+	const [html, setHTML] = useState({text: ""});
+	const [undoHTML, setUndoHTML] = useState( [] );
+
   
 	//user is "finished typing," do something
 	const doneTyping = evt => {
-		const newArray = undoHTML;
-		newArray.push(html);
-		setUndoHTML(newArray);
-		setHTML(evt.target.value);
-  };
+    console.log(typeof undoHTML);
+    let newArray = undoHTML;
+		newArray.push(html.text);
 
-  const styleHtml = style => {
-    
-  }
-  
+		// if (newArray.length() === 10) {
+		// 	console.log('hah');
+		// 	setUndoHTML(undoHTML.shift());
+		// }
+
+		setUndoHTML(newArray);
+		setHTML({text: evt.target.value});
+	};
+
+	const styleHtml = style => {
+		let newHTML;
+		if (html.includes(`<${style}>`)) {
+			newHTML = html.replace(`<${style}>`, ``).replace(`</${style}>`, ``);
+		} else {
+			newHTML = `<${style}>${html}</${style}>`;
+		}
+		setHTML(newHTML);
+	};
+
 	return (
 		<div className='App'>
-			<FormControl />
-			<Editor doneTyping={doneTyping} html={html}/>
+			<FormControl styleHtml={styleHtml} />
+			<Editor doneTyping={doneTyping} html={html.text} />
 		</div>
 	);
 }

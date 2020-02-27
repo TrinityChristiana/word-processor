@@ -9,7 +9,6 @@ const Editor = props => {
 	let typingTimer; //timer identifier
     const {doneTyping, html} = props;
 
-
 	//on keyup, start the countdown
 	const handleChange = (evt) => {
         // console.log(evt.target.value)
