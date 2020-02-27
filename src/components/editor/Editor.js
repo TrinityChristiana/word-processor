@@ -32,7 +32,7 @@ const Editor = props => {
             // onChange={getText} // handle innerHTML change
             onKeyDown={handleKeyDown}
             onChange={handleChange}
-			tagName='div' // Use a custom HTML tag (uses a div by default)
+            tagName='div' // Use a custom HTML tag (uses a div by default)
 		/>
 	);
 };

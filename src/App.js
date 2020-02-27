@@ -1,30 +1,50 @@
-import React, {useState} from 'react';
+import React, {useState, createRef} from 'react';
 import Editor from './components/editor/Editor';
 import FormControl from './components/formControl/FormControl';
 import './App.css';
 
 function App() {
-	const [html, setHTML] = useState({text: ""});
-	const [undoHTML, setUndoHTML] = useState( [] );
-
-  
-	//user is "finished typing," do something
+	const [html, setHTML] = useState('');
+	const [undoHTML, setUndoHTML] = useState([]);
+  const editorNode = createRef()
 	const doneTyping = evt => {
-    console.log(typeof undoHTML);
-    let newArray = undoHTML;
-		newArray.push(html.text);
+		let newArray = undoHTML;
+		newArray.push(html);
 
-		// if (newArray.length() === 10) {
-		// 	console.log('hah');
-		// 	setUndoHTML(undoHTML.shift());
-		// }
+		// Keeps undoHTML array from holding al ot of information
+		if (undoHTML.length === 10) {
+			undoHTML.shift();
+		}
 
 		setUndoHTML(newArray);
-		setHTML({text: evt.target.value});
+		setHTML(evt.target.value);
+	};
+
+	const getSelectionText = () => {
+    let text = '';
+		if (window.getSelection) {
+      text = window.getSelection()/* .toString(); */
+      if(text.rangeCount > 0){
+        const textRange = text.getRangeAt(0);
+        const selectionStart = textRange.startOffset;
+        const selectionEnd = textRange.endOffset;
+
+        if(selectionEnd !== selectionStart){
+          console.log(editorNode)
+          console.log(text.getRangeAt(0).commonAncestorContainer.parentNode == editorNode);
+        }
+      }
+    }
+     else if (document.selection && document.selection.type !== 'Control') {
+      text = document.selection.createRange().text;
+      console.log(text, "two")
+		}
+		// return text;
 	};
 
 	const styleHtml = style => {
 		let newHTML;
+		console.log(html);
 		if (html.includes(`<${style}>`)) {
 			newHTML = html.replace(`<${style}>`, ``).replace(`</${style}>`, ``);
 		} else {
@@ -34,9 +54,10 @@ function App() {
 	};
 
 	return (
-		<div className='App'>
+		<div className='App' onMouseUp={getSelectionText}>
+      random text here
 			<FormControl styleHtml={styleHtml} />
-			<Editor doneTyping={doneTyping} html={html.text} />
+			<Editor doneTyping={doneTyping} html={html} getSelectionText={getSelectionText}/>
 		</div>
 	);
 }
