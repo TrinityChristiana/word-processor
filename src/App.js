@@ -4,20 +4,20 @@ import FormControl from './components/formControl/FormControl';
 import './App.css';
 
 const App = () => {
-	const [html, setHTML] = useState('');
+	const [html, setHTML] = useState('<div><h1><p>THis is words</p><h1></div>');
 	const [undoHTML, setUndoHTML] = useState([]);
 	const [highRange, setHighRange] = useState();
 
 	const contentEditable = React.createRef();
 
-	const getCaretCharacterOffsetWithin = elem => {
-		while (el.parentNode) {
-      el = el.parentNode;
-      console.log(el.parentNode)
-			if (el.tagName === div) return el;
-		}
-		return null;
-	};
+	// const getCaretCharacterOffsetWithin = elem => {
+	// 	while (el.parentNode) {
+    //   el = el.parentNode;
+    //   console.log(el.parentNode)
+	// 		if (el.tagName === div) return el;
+	// 	}
+	// 	return null;
+	// };
 
 	// useEffect(() => {
 	// 	if (highRange !== undefined) {
@@ -41,10 +41,18 @@ const App = () => {
 
 		setUndoHTML(newArray);
 		setHTML(evt.target.value);
+
 	};
 
+	useEffect(() => {
+		const newText = html;
+		const thishere = newText.replace("&lt;className={bold}&gt;", "<b>").replace("&lt;/className={bold}&gt;", "</b>");
+		console.log(thishere)
+		setHTML(thishere)
+	}, [html])
+
 	const getSelectionText = () => {
-		getCaretCharacterOffsetWithin(contentEditable.current);
+		// getCaretCharacterOffsetWithin(contentEditable.current);
 		// console.log('changed it');
 		// if (window.getSelection().toString() !== '') {
 		// 	setHighRange(window.getSelection().getRangeAt(0));
@@ -52,7 +60,18 @@ const App = () => {
 	};
 
 	const styleHtml = style => {
-		document.execCommand(style, true);
+		let range = new Range();
+
+		range.setStart(contentEditable.current, 0);
+		range.setEnd(contentEditable.current, 0);
+	  
+		// toString of a range returns its content as text (without tags)
+		console.log(range);
+		// range.style // Example: italic
+	  
+		// apply this range for document selection (explained later)
+		document.getSelection().addRange(range);
+		console.log(document.getSelection().classListç)
 	};
 
 	return (
