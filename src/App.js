@@ -4,9 +4,11 @@ import FormControl from './components/formControl/FormControl';
 import './App.css';
 
 const App = () => {
-	const [html, setHTML] = useState('<div><h1><p>THis is words</p><h1></div>');
+	const [html, setHTML] = useState('Hello World');
 	const [undoHTML, setUndoHTML] = useState([]);
-	const [highRange, setHighRange] = useState();
+	// const [highRange, setHighRange] = useState();
+
+
 
 	const contentEditable = React.createRef();
 
@@ -46,7 +48,7 @@ const App = () => {
 
 	useEffect(() => {
 		const newText = html;
-		const thishere = newText.replace("&lt;className={bold}&gt;", "<b>").replace("&lt;/className={bold}&gt;", "</b>");
+		const thishere = newText.replace("&lt;className={bold}&gt;", "<b>").replace("&lt;/className={bold}&gt;", "</b>").replace("&lt;/className={italics}&gt;", "</em>").replace("&lt;className={italics}&gt;", "<em>");
 		console.log(thishere)
 		setHTML(thishere)
 	}, [html])
@@ -60,18 +62,19 @@ const App = () => {
 	};
 
 	const styleHtml = style => {
-		let range = new Range();
+		document.execCommand(style);
+		// let range = new Range();
 
-		range.setStart(contentEditable.current, 0);
-		range.setEnd(contentEditable.current, 0);
+		// range.setStart(contentEditable.current, 0);
+		// range.setEnd(contentEditable.current, 0);
 	  
-		// toString of a range returns its content as text (without tags)
-		console.log(range);
-		// range.style // Example: italic
+		// // toString of a range returns its content as text (without tags)
+		// console.log(range);
+		// // range.style // Example: italic
 	  
-		// apply this range for document selection (explained later)
-		document.getSelection().addRange(range);
-		console.log(document.getSelection().classListç)
+		// // apply this range for document selection (explained later)
+		// document.getSelection().addRange(range);
+		// console.log(document.getSelection().classListç)
 	};
 
 	return (
